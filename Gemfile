@@ -6,7 +6,7 @@ gem 'pg'
 
 gem 'activeadmin'
 gem 'haml'
-gem 'jquery-rails'
+gem 'jquery-rails', '2.3.0'
 gem 'meta_search',    '>= 1.1.0.pre'
 gem 'redcarpet'
 gem 'simple_form'
