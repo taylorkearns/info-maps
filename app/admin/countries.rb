@@ -2,13 +2,13 @@ ActiveAdmin.register Country do
   config.sort_order = 'name_asc'
 
   index do
-    column :region_id do |country|
-      Region.find_by_id(country.region_id).name
-    end
     column :name
     column :capital
     column :population do |country|
-      number_with_delimiter country.population
+      number_to_human country.population
+    end
+    column :region_id do |country|
+      Region.find_by_id(country.region_id).name
     end
 
     default_actions

@@ -6,4 +6,6 @@ class Country < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :region_id, presence: true
+  validates :map_id, presence: true, uniqueness: true
+  validates :slug, presence: true, uniqueness: true
 end
