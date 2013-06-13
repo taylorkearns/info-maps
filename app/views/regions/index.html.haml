@@ -1,0 +1,5 @@
+%h1 Select a Map
+
+%ul
+- @regions.each do |region|
+  %li= link_to region.name, region_path(region)

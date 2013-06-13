@@ -1,11 +1,11 @@
 InfoMaps::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :maps, only: [:index, :show, :demo]
+  resources :regions
 
-  match '/demo', to: 'maps#demo'
+  match '/demo', to: 'regions#demo'
 
-  root to: 'maps#index'
+  root to: 'regions#index'
 
   ActiveAdmin.routes(self)
 end
