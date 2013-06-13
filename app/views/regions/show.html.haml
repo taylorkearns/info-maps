@@ -1,5 +1,5 @@
-%div{ id: "map-#{@region.id}" }
-  %ul{ class: @region.id }
-    - @region.countries_list.each do |country|
-      %li{ class: "#{country[:identifier]}" }
-        %a{ href: "#{country[:href]}" } #{country[:name]}
+%div{ id: "map-#{@region.slug}" }
+  %ul{ class: @region.slug }
+    - @region.countries_list.each do |member|
+      %li{ class: "#{member[:identifier]}" }
+        %a{ href: "#{member[:href]}" } #{member[:name]}

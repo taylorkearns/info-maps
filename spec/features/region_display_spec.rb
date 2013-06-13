@@ -6,12 +6,12 @@ describe 'viewing a region' do
 
     visit region_path(region)
 
-    page.should have_css "#map-#{region.id}"
-    page.should have_css "ul.#{region.id}"
+    page.should have_css "#map-#{region.slug}"
+    page.should have_css "ul.#{region.slug}"
 
-    region.countries_list.each do |country|
-      page.should have_css "li.#{country[:identifier]}"
-      page.should have_link country[:name], href: country[:href]
+    region.countries_list.each do |member|
+      page.should have_css "li.#{member[:identifier]}"
+      page.should have_link member[:name], href: member[:href]
     end
   end
 end
