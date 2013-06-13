@@ -14,6 +14,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_hash (0.9.13)
+      activesupport (>= 2.2.2)
     activeadmin (0.6.0)
       arbre (>= 1.0.1)
       bourbon (>= 1.0.0)
@@ -144,7 +146,6 @@ GEM
       polyamorous (~> 0.5.0)
     method_source (0.8.1)
     mime-types (1.23)
-    modernizr-rails (2.6.2.2)
     multi_json (1.7.6)
     nokogiri (1.5.9)
     orm_adapter (0.4.0)
@@ -245,6 +246,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_hash
   activeadmin
   better_errors
   binding_of_caller
@@ -259,7 +261,6 @@ DEPENDENCIES
   haml-rails
   jquery-rails (= 2.3.0)
   meta_search (>= 1.1.0.pre)
-  modernizr-rails
   pg
   quiet_assets
   rails (= 3.2.13)
