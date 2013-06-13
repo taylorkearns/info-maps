@@ -1,4 +1,8 @@
 class Region < ActiveHash::Base
+  include ActiveHash::Associations
+
+  has_many :countries
+
   self.data = [
     {
       id: 'south-america',
@@ -78,8 +82,8 @@ class Region < ActiveHash::Base
     },
     {
       id: 'africa',
-      name: 'Africa'
+      name: 'Africa',
+      countries_list: []
     },
   ]
 end
-
