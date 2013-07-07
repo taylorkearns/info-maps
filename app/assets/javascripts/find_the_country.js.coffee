@@ -28,6 +28,7 @@ FindTheCountryView = Backbone.View.extend
     @showName(name)
 
   showName: (name) ->
+    #TODO Next step: get this working
     $('.country-name').each ->
       if $(this).text() == name
         $(this).show()

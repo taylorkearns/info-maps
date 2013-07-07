@@ -13,4 +13,7 @@ class RegionsController < ApplicationController
       render 'find_the_country'
     end
   end
+
+  def find_the_country
+  end
 end
