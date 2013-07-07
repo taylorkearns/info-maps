@@ -3,6 +3,10 @@ InfoMaps::Application.routes.draw do
 
   resources :regions
 
+  resources :games do
+    resources :regions
+  end
+
   match '/demo', to: 'regions#demo'
 
   root to: 'regions#index'

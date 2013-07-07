@@ -1,0 +1,7 @@
+%h1 Find the Country
+
+%h2 Select a Region
+
+%ul
+  - @game.regions.each do |region|
+    %li= link_to region.name, game_region_path(game_id: @game.id, id: region.id)

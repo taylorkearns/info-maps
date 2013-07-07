@@ -1,6 +1,8 @@
 class Country < ActiveRecord::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
 
+  after_save :expire_cache
+
   # TODO This is causing a pg error "undefined method `scoped' for Region:Class"
   #belongs_to_active_hash :region
 
@@ -11,5 +13,9 @@ class Country < ActiveRecord::Base
 
   def self.displayed_data
     [:capital, :population]
+  end
+
+  def expire_cache
+    Rails.cache.delete 'views/country_data'
   end
 end
