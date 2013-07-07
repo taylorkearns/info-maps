@@ -1,0 +1,23 @@
+#find-the-country
+  #region
+    %div{ id: "map-#{@region.slug}" }
+      %ul{ class: @region.slug }
+        - @region.countries.each do |country|
+          %li{ class: "#{country[:map_id]}" }
+            %a{ href: "##{country[:slug]}" } #{country[:name]}
+            %table.data-fields{ class: country[:slug] }
+              %thead
+                %tr
+                  %th.country-name{ colspan: 2 } #{country[:name]}
+
+  #controls
+    %a.next Next
+
+:javascript
+  $(function() {
+    $(window).on('hashchange', function() {
+      location.hash = '';
+    });
+
+    new InfoMaps.FindTheCountryView({ el: "#map-#{@region.slug}" });
+  });

@@ -1,6 +1,8 @@
 class Region < ActiveHash::Base
   include ActiveHash::Associations
 
+  belongs_to :game
+
   has_many :countries
 
   self.data = [

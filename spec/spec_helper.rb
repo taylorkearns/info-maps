@@ -9,6 +9,10 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 require 'factory_girl'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
+require 'capybara/webkit'
+
+Capybara.javascript_driver = :poltergeist
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -37,4 +41,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+  def screenshot
+    Capybara::Screenshot.screen_shot_and_open_image
+  end
 end

@@ -36,8 +36,13 @@ end
 
 group :test do
   gem 'capybara'
+  #TODO How do I get screenshot working?
+  # Get error about not finding launchy.
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'poltergeist'
   gem 'shoulda-matchers'
+  gem 'capybara-webkit'
 end

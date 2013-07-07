@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'viewing a region' do
-  it 'contains the necessary HTML elements and attributes' do
+  it 'contains the necessary HTML elements and attributes', js: true do
     region = Region.first
     countries = Country.where region_id: region.id
 
