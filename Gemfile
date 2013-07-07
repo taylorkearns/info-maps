@@ -6,6 +6,7 @@ gem 'pg'
 
 gem 'activeadmin'
 gem 'active_hash'
+gem 'dalli'
 gem 'haml'
 gem 'jquery-rails', '2.3.0'
 gem 'meta_search',    '>= 1.1.0.pre'
@@ -28,8 +29,7 @@ end
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'foreman'
+  #gem 'binding_of_caller'
   gem 'guard-rspec'
   gem 'haml-rails'
 end
