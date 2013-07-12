@@ -6,7 +6,8 @@ FindTheCountryView = Backbone.View.extend
     @$el.cssMap(
       size: 750,
       tooltips: 'hidden',
-      onClick: (e) => @checkCountry(e)
+      onClick: (li) =>
+        @checkCountry(li)
     )
     $.removeCookie('countryNames')
     $.removeCookie('currentQuiz')
@@ -36,31 +37,33 @@ FindTheCountryView = Backbone.View.extend
         $(this).parents('table').show()
         return
 
-  checkCountry: (e) ->
-    name = e.find('table.data-fields .country-name').text()
+  checkCountry: ($listItem) ->
+    answer = $listItem.find('table.data-fields .country-name').text()
     currentQuiz = $.cookie('currentQuiz')
 
-    if name == currentQuiz
-      @correctAnswer(currentQuiz)
+    if answer == currentQuiz
+      @correctAnswer(answer)
     else
-      @incorrectAnswer(currentQuiz)
+      @incorrectAnswer(answer)
 
-  correctAnswer: (currentQuiz) ->
+  correctAnswer: (answer) ->
     @alertCorrect()
-    @tallyCorrect(currentQuiz)
-    @removeFromQuizOptions(currentQuiz)
+    @tallyCorrect(answer)
+    @removeFromQuizOptions(answer)
     @checkForComplete()
 
-  incorrectAnswer: (currentQuiz) ->
+  incorrectAnswer: (answer) ->
     @alertIncorrect()
     @tallyIncorrect()
 
   alertCorrect: -> console.log 'correct!'
 
-  tallyCorrect: ->
-    # do something
+  tallyCorrect: (answer)->
+    correctAnswers = $('#correct-answers > ul')
+    correctAnswer = $("<li>#{answer}</li>")
+    correctAnswers.append(correctAnswer)
 
-  removeFromQuizOptions: ->
+  removeFromQuizOptions: (answer) ->
     # do something
 
   checkForComplete: ->
@@ -68,7 +71,7 @@ FindTheCountryView = Backbone.View.extend
 
   alertIncorrect: -> console.log 'incorrect. try again.'
 
-  tallyInorrect: ->
+  tallyIncorrect: ->
     # do something
 
 @InfoMaps ||= {}
