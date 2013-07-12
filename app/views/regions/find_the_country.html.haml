@@ -1,4 +1,4 @@
-#find-the-country
+#find-the-country.game
   #region
     %div{ id: "map-#{@region.slug}" }
       %ul{ class: @region.slug }
@@ -13,11 +13,14 @@
   #controls
     %a.next Next
 
+  %span#alert-box
+    Find the Country
+
 :javascript
   $(function() {
     $(window).on('hashchange', function() {
       location.hash = '';
     });
 
-    new InfoMaps.FindTheCountryView({ el: "#map-#{@region.slug}" });
+    new InfoMaps.FindTheCountryView({ el: "#find-the-country" });
   });
