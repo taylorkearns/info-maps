@@ -1,11 +1,19 @@
 .game
   #alert-box
-    display: none
     position: fixed
+    right: 50px
     top: 60px
-    width: 100%
+    width: 400px
     color: #fff
     text-align: center
     font-size: 32px
     font-weight: 700
-    text-shadow: -1px -1px 5px #666
+
+    &.affirmative
+      color: green
+
+    &.negative
+      color: red
+
+    &.completed
+      color: #fff
