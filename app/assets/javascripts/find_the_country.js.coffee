@@ -1,6 +1,5 @@
 FindTheCountryView = Backbone.View.extend
   events:
-    'click a#next': 'quizOnCountry'
     'click a.reload': 'reloadGame'
 
   initialize: (options) ->
@@ -10,15 +9,35 @@ FindTheCountryView = Backbone.View.extend
       onClick: (li) =>
         @checkCountry(li)
     )
+
     $.removeCookie('countryNames')
     $.removeCookie('currentQuiz')
+    $.cookie('skips', '0')
+    $.cookie('turns', '0')
+
     @countryNames = @collectCountryNames()
     @loadCountryNames()
     @maxPoints = @countryNames.length
     @setScore(@maxPoints)
 
+    @$el.find('a#next').on 'click', =>
+      @quizOnCountry()
+
+      unless @beginningGame()
+        @penalize(0.5)
+        @displayScore()
+        @increment('skip')
+
+      @increment('turn')
+
+  beginningGame: ->
+    $.cookie('turns') == '0'
+
+  increment: (event) ->
+    $.cookie("#{event}s", $.cookie("#{event}s") + 1)
+
   swapNextText: ->
-    $('a#next').text('Next') if $('a#next').text() == 'Begin'
+    $('a#next').text('Next') if @beginningGame()
 
   getCountryNames: ->
     $.cookie('countryNames')
@@ -74,9 +93,12 @@ FindTheCountryView = Backbone.View.extend
     @hideQuiz()
     @tallyCorrect(answer)
     @removeFromQuizOptions(answer)
+    @displayScore()
+    @increment('turn')
 
     if @gameCompleted()
       @alertCompleted()
+      @displayScore()
       @offerGameReload()
     else
       @alertCorrect()
@@ -86,11 +108,13 @@ FindTheCountryView = Backbone.View.extend
     @hideQuiz()
     @alertIncorrect()
     @penalize(1)
+    @displayScore()
+    @increment('turn')
     @delayAndQuizAgain()
 
   hideQuiz: -> $('table.data-fields').hide()
 
-  alertCorrect: (speed = 300)->
+  alertCorrect: (speed = 300) ->
     $('#alert-box')
       .text('Correct')
       .removeClass('negative')
@@ -99,7 +123,7 @@ FindTheCountryView = Backbone.View.extend
       .delay(speed)
       .fadeOut(speed)
 
-  alertIncorrect: (speed = 300)->
+  alertIncorrect: (speed = 300) ->
     $('#alert-box')
       .text('Incorrect')
       .removeClass('affirmative')
@@ -108,7 +132,7 @@ FindTheCountryView = Backbone.View.extend
       .delay(speed)
       .fadeOut(speed)
 
-  tallyCorrect: (answer)->
+  tallyCorrect: (answer) ->
     correctAnswers = $('#correct-answers > ul')
     correctAnswer = $("<li>#{answer}</li>")
     correctAnswers.append(correctAnswer)
@@ -118,11 +142,14 @@ FindTheCountryView = Backbone.View.extend
     countriesArray.splice(countriesArray.indexOf(answer), 1).join(',')
     @setCountryNames(countriesArray)
 
+  getScore: ->
+    $.cookie('score')
+
   setScore: (points) ->
     $.cookie('score', points)
 
   penalize: (points) ->
-    @setScore($.cookie('score') - 1)
+    @setScore($.cookie('score') - points)
 
   gameCompleted: ->
     @getCountryNames() == ''
@@ -133,6 +160,16 @@ FindTheCountryView = Backbone.View.extend
       .removeClass('negative')
       .addClass('completed')
       .show()
+
+  displayScore: ->
+    $('#score .ratio').text(@scoreRatio())
+    $('#score .percentage').text(@scorePercentage())
+
+  scoreRatio: ->
+    "#{@getScore()}/#{@maxPoints}"
+
+  scorePercentage: ->
+    "#{Math.round(100 * (@getScore() / @maxPoints))}%"
 
   offerGameReload: ->
     $('a#next')
