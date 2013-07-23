@@ -14,6 +14,8 @@ FindTheCountryView = Backbone.View.extend
     $.removeCookie('currentQuiz')
     @countryNames = @collectCountryNames()
     @loadCountryNames()
+    @maxPoints = @countryNames.length
+    @setScore(@maxPoints)
 
   swapNextText: ->
     $('a#next').text('Next') if $('a#next').text() == 'Begin'
@@ -83,6 +85,7 @@ FindTheCountryView = Backbone.View.extend
   incorrectAnswer: (answer) ->
     @hideQuiz()
     @alertIncorrect()
+    @penalize(1)
     @delayAndQuizAgain()
 
   hideQuiz: -> $('table.data-fields').hide()
@@ -114,6 +117,12 @@ FindTheCountryView = Backbone.View.extend
     countriesArray = @getCountryNames().split(',')
     countriesArray.splice(countriesArray.indexOf(answer), 1).join(',')
     @setCountryNames(countriesArray)
+
+  setScore: (points) ->
+    $.cookie('score', points)
+
+  penalize: (points) ->
+    @setScore($.cookie('score') - 1)
 
   gameCompleted: ->
     @getCountryNames() == ''
