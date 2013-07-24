@@ -1,23 +1,22 @@
 #country-data
   #region
-    - cache('country_data') do
-      %div{ id: "map-#{@region.slug}" }
-        %ul{ class: @region.slug }
-          - @region.countries.each do |country|
-            %li{ class: "#{country[:map_id]}" }
-              %a{ href: "##{country[:slug]}" } #{country[:name]}
+    %div{ id: "map-#{@region.slug}" }
+      %ul{ class: @region.slug }
+        - @region.countries.each do |country|
+          %li{ class: "#{country[:map_id]}" }
+            %a{ href: "##{country[:slug]}" } #{country[:name]}
 
-              %table.data-fields{ class: country[:slug] }
-                %thead
-                  %tr
-                    %th{ colspan: 2 } #{country[:name]}
+            %table.data-fields{ class: country[:slug] }
+              %thead
+                %tr
+                  %th{ colspan: 2 } #{country[:name]}
 
-                %tbody
-                  - Country.displayed_data.each do |data_point|
-                    - if country[data_point].present?
-                      %tr
-                        %th= data_point.to_s
-                        %td= country[data_point]
+              %tbody
+                - Country.displayed_data.each do |data_point|
+                  - if country[data_point].present?
+                    %tr
+                      %th= data_point.to_s
+                      %td= country[data_point]
 
 :javascript
   $(function() {
