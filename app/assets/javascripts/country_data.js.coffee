@@ -2,7 +2,7 @@ CountryDataView = Backbone.View.extend
   initialize: (options) ->
     @$el.cssMap(
       size: 750,
-      'onClick': (e) => @showData(e)
+      onClick: (e) => @showData(e)
     )
 
   showData: (li) ->
