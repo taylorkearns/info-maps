@@ -7,7 +7,7 @@ FindTheCountryView = Backbone.View.extend
       size: 750,
       tooltips: 'hidden',
       onClick: (li) =>
-        @checkCountry(li)
+        @checkCountry(li) unless @noGame()
     )
 
     $.removeCookie('countryNames')
@@ -23,21 +23,21 @@ FindTheCountryView = Backbone.View.extend
     @$el.find('a#next').on 'click', =>
       @quizOnCountry()
 
-      unless @beginningGame()
+      unless @gameNotStarted()
         @penalize(0.5)
         @displayScore()
         @increment('skip')
 
       @increment('turn')
 
-  beginningGame: ->
+  gameNotStarted: ->
     $.cookie('turns') == '0'
 
   increment: (event) ->
     $.cookie("#{event}s", $.cookie("#{event}s") + 1)
 
   swapNextText: ->
-    $('a#next').text('Next') if @beginningGame()
+    $('a#next').text('Next') if @gameNotStarted()
 
   getCountryNames: ->
     $.cookie('countryNames')
@@ -178,6 +178,9 @@ FindTheCountryView = Backbone.View.extend
 
   reloadGame: ->
     location.reload()
+
+  noGame: ->
+    @gameNotStarted() || @gameCompleted()
 
 @InfoMaps ||= {}
 @InfoMaps.FindTheCountryView = FindTheCountryView
