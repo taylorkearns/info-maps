@@ -6,7 +6,6 @@ gem 'pg'
 
 gem 'activeadmin'
 gem 'active_hash'
-gem 'dalli'
 gem 'haml'
 gem 'jquery-rails', '2.3.0'
 gem 'meta_search',    '>= 1.1.0.pre'
@@ -29,15 +28,13 @@ end
 
 group :development do
   gem 'better_errors'
-  #gem 'binding_of_caller'
+  gem 'binding_of_caller'
   gem 'guard-rspec'
   gem 'haml-rails'
 end
 
 group :test do
   gem 'capybara'
-  #TODO How do I get screenshot working?
-  # Get error about not finding launchy.
   gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
