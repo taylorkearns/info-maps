@@ -7,6 +7,6 @@ class Region < ActiveHash::Base
 
   self.data = [
     { id: 1,  slug: 'south-america',  name: 'South America' },
-    { id: 2,  slug: 'africa',         name: 'Africa' }
+    { id: 2,  slug: 'europe',  name: 'Europe' }
   ]
 end
