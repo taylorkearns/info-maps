@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130613215735) do
+ActiveRecord::Schema.define(:version => 20130821165348) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20130613215735) do
     t.integer  "region_id"
     t.string   "map_id"
     t.string   "slug"
+    t.string   "currency"
   end
 
   create_table "regions", :force => true do |t|

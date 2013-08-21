@@ -12,7 +12,7 @@ class Country < ActiveRecord::Base
   validates :slug, presence: true, uniqueness: true
 
   def self.displayed_data
-    [:capital, :population]
+    [:capital, :population, :currency]
   end
 
   def expire_cache
